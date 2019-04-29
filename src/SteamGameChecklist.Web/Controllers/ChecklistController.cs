@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using SteamGameChecklist.Web.Db.Contexts;
 using SteamGameChecklist.Web.Db.Models;
 using System.Linq;
+using SteamGameChecklist.Web.Models;
 
 namespace SteamGameChecklist.Web.Controllers
 {
@@ -21,13 +22,27 @@ namespace SteamGameChecklist.Web.Controllers
         }
 
         [HttpPost("[action]")]
-        public void HideGame(long id)
+        public void HideGame([FromBody] HideGameRequest req)
         {
             using (var db = new SteamGameChecklistContext())
             {
-                var game = db.Find<Game>(id);
+                var game = db.Find<Game>(req.GameId);
                 game.Hidden = true;
                 db.Update(game);
+                db.SaveChanges();
+            }
+        }
+
+        [HttpGet("[action]")]
+        public Stats Stats()
+        {
+            using (var db = new SteamGameChecklistContext())
+            {
+                return new Stats
+                {
+                    TotalGames = db.Games.Count(),
+                    FinishedGames = db.Games.Where(g => g.Hidden).Count(),
+                };
             }
         }
     }
