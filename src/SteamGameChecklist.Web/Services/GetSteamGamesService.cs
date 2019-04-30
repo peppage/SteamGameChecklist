@@ -63,7 +63,7 @@ namespace SteamGameChecklist.Web.Services
         private async Task<OwnedGamesResultModel> GetGames(string apiKey, ulong userId)
         {
             var playerService = new PlayerService(apiKey);
-            var resp = await playerService.GetOwnedGamesAsync(userId);
+            var resp = await playerService.GetOwnedGamesAsync(userId, true, true);
             return resp.Data;
         }
     }
