@@ -33,7 +33,7 @@ namespace SteamGameChecklist.Web.Services
                     var played = 0;
                     if (game.PlaytimeLastTwoWeeks.HasValue)
                     {
-                        played = game.PlaytimeLastTwoWeeks.Value.Minutes;
+                        played = (int)game.PlaytimeLastTwoWeeks.Value.TotalMinutes;
                     }
 
                     if (g == null)
@@ -43,7 +43,7 @@ namespace SteamGameChecklist.Web.Services
                             Id = game.AppId,
                             Name = game.Name,
                             Playtime2Weeks = played,
-                            PlaytimeForever = game.PlaytimeForever.Minutes,
+                            PlaytimeForever = (int)game.PlaytimeForever.TotalMinutes,
                             Image = game.ImgLogoUrl,
                             Hidden = false,
                         });
@@ -51,7 +51,7 @@ namespace SteamGameChecklist.Web.Services
                     else
                     {
                         g.Playtime2Weeks = played;
-                        g.PlaytimeForever = game.PlaytimeForever.Minutes;
+                        g.PlaytimeForever = (int)game.PlaytimeForever.TotalMinutes;
                         db.Update(g);
                     }
                 }
