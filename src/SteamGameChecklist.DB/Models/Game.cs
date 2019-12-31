@@ -1,4 +1,4 @@
-namespace SteamGameChecklist.Web.Db.Models
+﻿namespace SteamGameChecklist.DB.Models
 {
     public class Game
     {

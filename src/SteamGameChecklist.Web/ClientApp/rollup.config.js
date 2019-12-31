@@ -1,17 +1,20 @@
 import svelte from 'rollup-plugin-svelte';
 import resolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
+import livereload from 'rollup-plugin-livereload';
 import { terser } from 'rollup-plugin-terser';
 
 const production = !process.env.ROLLUP_WATCH;
+const port = process.env.PORT;
+const buildDir = '../wwwroot/dist';
 
 export default {
-	input: 'src/main.js',
+	input: 'src/index.js',
 	output: {
-		sourcemap: true,
-		format: 'iife',
 		name: 'app',
-		file: 'public/bundle.js'
+		format: 'esm',
+		sourcemap: true,
+		dir: buildDir,
 	},
 	plugins: [
 		svelte({
@@ -20,7 +23,7 @@ export default {
 			// we'll extract any component CSS out into
 			// a separate file — better for performance
 			css: css => {
-				css.write('public/bundle.css');
+				css.write(`${buildDir}/bundle.css`);
 			}
 		}),
 
@@ -31,9 +34,24 @@ export default {
 		// https://github.com/rollup/rollup-plugin-commonjs
 		resolve(),
 		commonjs(),
+	
+		// In dev mode, call `npm run start` once
+		// the bundle has been generated
+		// !production && serve(),
 
+		// Watch the `public` directory and refresh the
+		// browser on changes when not in production
+		!production && livereload(
+			{
+				watch: '../wwwroot',
+				port,
+			}),
 		// If we're building for production (npm run build
 		// instead of npm run dev), minify
-		production && terser()
-	]
+		production && terser(),
+	],
+
+	watch: {
+		clearScreen: false
+	}
 };

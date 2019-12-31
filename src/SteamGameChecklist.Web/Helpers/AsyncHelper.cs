@@ -1,10 +1,10 @@
-using System;
+﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace SteamGameChecklist.Web.Helpers
 {
-    public class AsyncHelper
+    public static class AsyncHelper
     {
         private static readonly TaskFactory _taskFactory = new TaskFactory(
             CancellationToken.None,

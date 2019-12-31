@@ -1,9 +1,9 @@
-using Microsoft.EntityFrameworkCore;
-using SteamGameChecklist.Web.Db.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using SteamGameChecklist.DB.Models;
 
-namespace SteamGameChecklist.Web.Db.Contexts
+namespace SteamGameChecklist.DB.Contexts
 {
-    public class SteamGameChecklistContext : DbContext
+    public class ChecklistContext : DbContext
     {
         public DbSet<Game> Games { get; set; }
 

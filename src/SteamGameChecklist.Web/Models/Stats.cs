@@ -1,4 +1,4 @@
-namespace SteamGameChecklist.Web.Models
+﻿namespace SteamGameChecklist.Web.Models
 {
     public class Stats
     {

@@ -1,39 +1,48 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26124.0
-MinimumVisualStudioVersion = 15.0.26124.0
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{5866D816-6888-47F7-92FF-7EECDC63A51B}"
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29521.150
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpaCliMiddleware", "src\SpaCliMiddleware\SpaCliMiddleware.csproj", "{14A1CAB6-55D4-4542-BED9-DBAC754B2EE0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SteamGameChecklist.Web", "src\SteamGameChecklist.Web\SteamGameChecklist.Web.csproj", "{83FAF75F-7FFA-41D6-9BDA-1AA452FB034E}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{A31D9C49-287B-4AA6-BDCA-FD01A98895FA}"
+	ProjectSection(SolutionItems) = preProject
+		src\SpaCliMiddleware.Tests\SpaCliMiddleware.Tests.csproj = src\SpaCliMiddleware.Tests\SpaCliMiddleware.Tests.csproj
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SteamGameChecklist.Web", "src\SteamGameChecklist.Web\SteamGameChecklist.Web.csproj", "{697979A2-3E52-4FC2-8B91-C7A1B7CCB34D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SteamGameChecklist.DB", "src\SteamGameChecklist.DB\SteamGameChecklist.DB.csproj", "{C6C7AEE8-270B-47A7-825B-F4F7C013C7C4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{1F159EC2-C48E-42DC-98B1-6C9EE6D98DC8}"
+	ProjectSection(SolutionItems) = preProject
+		LICENSE.md = LICENSE.md
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
-		Debug|x64 = Debug|x64
-		Debug|x86 = Debug|x86
 		Release|Any CPU = Release|Any CPU
-		Release|x64 = Release|x64
-		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{14A1CAB6-55D4-4542-BED9-DBAC754B2EE0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{14A1CAB6-55D4-4542-BED9-DBAC754B2EE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{14A1CAB6-55D4-4542-BED9-DBAC754B2EE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{14A1CAB6-55D4-4542-BED9-DBAC754B2EE0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{697979A2-3E52-4FC2-8B91-C7A1B7CCB34D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{697979A2-3E52-4FC2-8B91-C7A1B7CCB34D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{697979A2-3E52-4FC2-8B91-C7A1B7CCB34D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{697979A2-3E52-4FC2-8B91-C7A1B7CCB34D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C6C7AEE8-270B-47A7-825B-F4F7C013C7C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C6C7AEE8-270B-47A7-825B-F4F7C013C7C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C6C7AEE8-270B-47A7-825B-F4F7C013C7C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C6C7AEE8-270B-47A7-825B-F4F7C013C7C4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{83FAF75F-7FFA-41D6-9BDA-1AA452FB034E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{83FAF75F-7FFA-41D6-9BDA-1AA452FB034E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{83FAF75F-7FFA-41D6-9BDA-1AA452FB034E}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{83FAF75F-7FFA-41D6-9BDA-1AA452FB034E}.Debug|x64.Build.0 = Debug|Any CPU
-		{83FAF75F-7FFA-41D6-9BDA-1AA452FB034E}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{83FAF75F-7FFA-41D6-9BDA-1AA452FB034E}.Debug|x86.Build.0 = Debug|Any CPU
-		{83FAF75F-7FFA-41D6-9BDA-1AA452FB034E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{83FAF75F-7FFA-41D6-9BDA-1AA452FB034E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{83FAF75F-7FFA-41D6-9BDA-1AA452FB034E}.Release|x64.ActiveCfg = Release|Any CPU
-		{83FAF75F-7FFA-41D6-9BDA-1AA452FB034E}.Release|x64.Build.0 = Release|Any CPU
-		{83FAF75F-7FFA-41D6-9BDA-1AA452FB034E}.Release|x86.ActiveCfg = Release|Any CPU
-		{83FAF75F-7FFA-41D6-9BDA-1AA452FB034E}.Release|x86.Build.0 = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{83FAF75F-7FFA-41D6-9BDA-1AA452FB034E} = {5866D816-6888-47F7-92FF-7EECDC63A51B}
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {87895BE0-C91D-41A5-AD02-9F8F7A888AE6}
 	EndGlobalSection
 EndGlobal

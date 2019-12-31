@@ -1,9 +1,9 @@
-using System.Collections.Generic;
-using Microsoft.AspNetCore.Mvc;
-using SteamGameChecklist.Web.Db.Contexts;
-using SteamGameChecklist.Web.Db.Models;
-using System.Linq;
+﻿using Microsoft.AspNetCore.Mvc;
+using SteamGameChecklist.DB.Contexts;
+using SteamGameChecklist.DB.Models;
 using SteamGameChecklist.Web.Models;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace SteamGameChecklist.Web.Controllers
 {
@@ -13,9 +13,9 @@ namespace SteamGameChecklist.Web.Controllers
         [HttpGet("[action]")]
         public IEnumerable<Game> AllGames()
         {
-            using (var db = new SteamGameChecklistContext())
+            using (var db = new ChecklistContext())
             {
-                return db.Games.Where(g => g.Hidden == false)
+                return db.Games.Where(g => !g.Hidden)
                     .OrderByDescending(g => g.Playtime2Weeks)
                     .ThenByDescending(g => g.PlaytimeForever).ToList();
             }
@@ -24,7 +24,7 @@ namespace SteamGameChecklist.Web.Controllers
         [HttpPost("[action]")]
         public void HideGame([FromBody] HideGameRequest req)
         {
-            using (var db = new SteamGameChecklistContext())
+            using (var db = new ChecklistContext())
             {
                 var game = db.Find<Game>(req.GameId);
                 game.Hidden = true;
@@ -36,7 +36,7 @@ namespace SteamGameChecklist.Web.Controllers
         [HttpGet("[action]")]
         public Stats Stats()
         {
-            using (var db = new SteamGameChecklistContext())
+            using (var db = new ChecklistContext())
             {
                 return new Stats
                 {

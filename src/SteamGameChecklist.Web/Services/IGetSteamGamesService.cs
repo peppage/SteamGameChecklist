@@ -1,4 +1,4 @@
-namespace SteamGameChecklist.Web.Services
+﻿namespace SteamGameChecklist.Web.Services
 {
     public interface IGetSteamGamesService
     {

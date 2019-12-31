@@ -1,10 +1,10 @@
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
+using Microsoft.AspNetCore.SpaServices;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using SpaCliMiddleware;
 using SteamGameChecklist.Web.Services;
 
 namespace SteamGameChecklist.Web
@@ -21,12 +21,11 @@ namespace SteamGameChecklist.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
-            // In production, the React files will be served from this directory
+            services.AddControllersWithViews();
             services.AddSpaStaticFiles(configuration =>
             {
-                configuration.RootPath = "ClientApp/public";
+                configuration.RootPath = "wwwroot";
             });
 
             services.AddSingleton(Configuration);
@@ -34,7 +33,7 @@ namespace SteamGameChecklist.Web
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -43,32 +42,33 @@ namespace SteamGameChecklist.Web
             else
             {
                 app.UseExceptionHandler("/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
             }
 
             var steamService = app.ApplicationServices.GetService<IGetSteamGamesService>();
             steamService.LoadGames();
 
-            app.UseHttpsRedirection();
-            app.UseStaticFiles();
             app.UseSpaStaticFiles();
 
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller}/{action=Index}/{id?}");
-            });
+            app.UseRouting();
 
-            app.UseSpa(spa =>
+            app.UseEndpoints(endpoints =>
             {
-                spa.Options.SourcePath = "ClientApp";
-
+                endpoints.MapControllers();
+#if DEBUG
                 if (env.IsDevelopment())
                 {
-                    spa.UseProxyToSpaDevelopmentServer("http://localhost:8080");
+                    endpoints.MapToSpaCliProxy(
+                        "{*path}",
+                        new SpaOptions { SourcePath = "ClientApp" },
+                        npmScript: env.IsDevelopment() ? "autobuild" : "",
+                        port: 35729,
+                        regex: "LiveReload enabled",
+                        forceKill: true,
+                        useProxy: false
+                    );
                 }
+#endif
+                endpoints.MapFallbackToFile("index.html");
             });
         }
     }
