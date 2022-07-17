@@ -1,5 +1,7 @@
 # Steam Game Checklist
 
+❗ **Just an example repo. Archived because it's not going to be updated.**
+
 ## About (purpose)
 
 I need a list of the steam games I own so I can make sure I've written
